@@ -1,0 +1,66 @@
+//I am math. Give me parameters so I can eat them up!!!
+//My digestive system prefers if they are passed as objects!!!
+
+var overLap (p,t,k)
+{
+	y = 0;
+	w = (p.c_angle)/(2*pi);							//t = theta
+	w = w * steps;									//w is p.c_angle in step form
+	v = (p.p_angle)/(2*pi);
+	v = v * steps;									//v is p.p_angle in step form
+	i = (2*pi)/(p.steps);
+	if ((t>=0) & (t<p.p_angle) & (t<p.c_anle))
+	{
+		for(j = 0; j++; j = k)
+		{
+			x = p.B_field(i*j);
+			y = y + x;
+		}
+		y = y * i;
+		break;
+	}
+	if ((t=<p.p_angle) & (t>p.c_anle))			//p.p_angle = angle subtended by pole, p.c_angle = angle subtended by coil
+	{
+		for(j = k - w; j++; j = k)
+		{
+			x = p.B_field(i*j);
+			y = y + x;
+		}
+		y = y * i;
+		break;
+	}
+	if ((t>=p.p_angle) & (t=<p.c_anle))			
+	{
+		for(j = 0; j++; j = v)
+		{
+			x = p.B_field(i*j);
+			y = y + x;
+		}
+		y = y * i;
+		break;
+	}
+	if ((t>p.p_angle) & (t=<(p.p_angle + p.c_angle)))			
+	{
+		for(j = k - w; j++; j = v)
+		{
+			x = p.B_field(i*j);
+			y = y + x;
+		}
+		y = y * i;
+		break;
+	}
+	return y;
+}
+
+var conv = function(p)
+{
+	var array[steps + 1];
+	theta = 0;
+	i = (2*pi/p.steps);
+	for (j = 0;j++;j = p.steps)
+	{	
+		theta = i*j;
+		array[j] = overLap(p,theta,j);
+	}
+}
+
